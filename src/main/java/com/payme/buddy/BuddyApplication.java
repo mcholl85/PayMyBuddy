@@ -1,13 +1,12 @@
-package com.payme.budy.appli;
-
+package com.payme.buddy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppliApplication {
+public class BuddyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppliApplication.class, args);
+		SpringApplication.run(BuddyApplication.class, args);
 	}
 
 }
