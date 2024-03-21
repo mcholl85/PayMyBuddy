@@ -1,0 +1,29 @@
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255),
+    firstname VARCHAR(255),
+    balance NUMERIC(38,2) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE transactions (
+    id BIGSERIAL PRIMARY KEY,
+    amount NUMERIC(38,2) NOT NULL,
+    fee NUMERIC(38,2) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    sender_id BIGINT NOT NULL,
+    recipient_id BIGINT NOT NULL,
+    FOREIGN KEY (sender_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (recipient_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE connexions (
+    id BIGSERIAL PRIMARY KEY,
+    user1_id BIGINT NOT NULL,
+    user2_id BIGINT NOT NULL,
+    FOREIGN KEY (user1_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (user2_id) REFERENCES users (id) ON DELETE CASCADE
+);
