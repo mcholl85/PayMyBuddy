@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -36,9 +35,11 @@ public class User {
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "sender")
-    private List<Transaction> sentTransactions;
+    public void addAmountToBalance(BigDecimal amount) {
+        this.setBalance(balance.add(amount));
+    }
 
-    @OneToMany(mappedBy = "recipient")
-    private List<Transaction> receivedTransactions;
+    public void removeAmountToBalance(BigDecimal amount) {
+        this.setBalance(balance.subtract(amount));
+    }
 }
